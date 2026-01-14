@@ -1,0 +1,48 @@
+{% extends 'absences/base_admin.html' %}
+{% block title %}Statistiques des étudiants absents{% endblock %}
+
+{% block content %}
+
+<h4 class="fw-bold mb-3">
+    Statistiques des étudiants absents
+</h4>
+
+<p class="text-muted mb-4">
+    Ce tableau présente la liste des étudiants classés selon le nombre total
+    d’absences déclarées par les enseignants.
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Enseignant déclarant</th>
+                <th class="text-center">Nombre d’absences</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for s in stats %}
+            <tr>
+                <td>{{ s.0 }}</td>
+                <td>{{ s.1 }}</td>
+                <td>{{ s.2 }}</td>
+                <td>{{ s.3 }}</td>
+                <td class="text-center fw-bold">{{ s.4 }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">
+                    Aucune absence enregistrée.
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

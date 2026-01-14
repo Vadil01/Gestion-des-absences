@@ -1,0 +1,67 @@
+{% extends 'absences/base_admin.html' %}
+{% block title %}Dashboard Administrateur{% endblock %}
+
+{% block content %}
+
+<!-- BIENVENUE -->
+<div class="mb-4">
+    <h3 class="fw-bold">
+        Bienvenue, {{ request.user.username }}
+    </h3>
+    <p class="text-muted">
+        Tableau de bord de l'administrateur
+    </p>
+</div>
+
+<!-- STATISTIQUES -->
+<div class="row g-4 mb-5">
+
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <i class="bi bi-people-fill display-6 text-primary"></i>
+                <h6 class="text-muted mt-2">Total Étudiants</h6>
+                <h2 class="fw-bold">{{ total_etudiants }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <i class="bi bi-person-badge-fill display-6 text-success"></i>
+                <h6 class="text-muted mt-2">Total Enseignants</h6>
+                <h2 class="fw-bold">{{ total_enseignants }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <i class="bi bi-exclamation-circle-fill display-6 text-danger"></i>
+                <h6 class="text-muted mt-2">Total Absences</h6>
+                <h2 class="fw-bold">{{ total_absences }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- MESSAGE ACADÉMIQUE -->
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h6 class="fw-bold mb-2">
+            <i class="bi bi-shield-lock-fill me-2"></i>
+            Bienvenue sur le système de gestion des absences académiques
+        </h6>
+        <p class="text-muted mb-0">
+            Ce système permet d’assurer un suivi rigoureux des absences des étudiants
+            et enseignants, contribuant à l’amélioration de la qualité académique
+            et à la transparence administrative.
+        </p>
+    </div>
+</div>
+
+{% endblock %}
+

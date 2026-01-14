@@ -1,0 +1,54 @@
+{% extends 'absences/base_admin.html' %}
+{% block title %}Liste des Matières{% endblock %}
+
+{% block content %}
+
+<h4 class="fw-bold mb-3">
+    <i class="bi bi-book-fill me-2"></i> Liste des matières
+</h4>
+
+<a href="{% url 'ajouter_matiere' %}" class="btn btn-primary mb-3">
+    <i class="bi bi-plus-circle"></i> Ajouter matière
+</a>
+
+<div class="card shadow-sm">
+    <div class="card-body table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Matière</th>
+                    <th>Enseignant</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for m in matieres %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ m.nom_matiere }}</td>
+                    <td>{{ m.enseignant }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'modifier_matiere' m.id_matiere %}" class="btn btn-sm btn-warning">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a href="{% url 'supprimer_matiere' m.id_matiere %}"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Supprimer cette matière ?')">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">
+                        Aucune matière enregistrée
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

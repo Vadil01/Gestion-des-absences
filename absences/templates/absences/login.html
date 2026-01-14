@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Connexion - Gestion A/R</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4">
+            <div class="card p-4 shadow form-card">
+                <div class="text-center mb-3">
+                    <i class="bi bi-shield-lock display-4 text-primary"></i>
+                    <h4 class="mt-2">Connexion</h4>
+                </div>
+
+                {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="login" class="form-label">Identifiant</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <input id="login" type="text" name="login" class="form-control" placeholder="Login" required>
+                            <div class="invalid-feedback">Veuillez saisir votre identifiant.</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input id="password" type="password" name="password" class="form-control" placeholder="Mot de passe" required>
+                            <div class="invalid-feedback">Veuillez saisir votre mot de passe.</div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary w-100"><i class="bi bi-box-arrow-in-right"></i> Se connecter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

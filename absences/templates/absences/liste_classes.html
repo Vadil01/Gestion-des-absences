@@ -1,0 +1,38 @@
+{% extends 'absences/base_admin.html' %}
+{% block content %}
+
+<h4>Gestion des Classes</h4>
+
+<a href="{% url 'ajouter_classe' %}" class="btn btn-success mb-3">
+    ➕ Ajouter une classe
+</a>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Nom</th>
+            <th>Niveau</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in classes %}
+        <tr>
+            <td>{{ c.nom_classe }}</td>
+            <td>{{ c.niveau }}</td>
+            <td>
+                <a href="{% url 'modifier_classe' c.id_classe %}" class="btn btn-sm btn-warning">✏</a>
+                <a href="{% url 'supprimer_classe' c.id_classe %}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Supprimer cette classe ?')">🗑</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="text-center text-muted">Aucune classe</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

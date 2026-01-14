@@ -1,0 +1,152 @@
+{% extends "absences/base_admin.html" %}
+
+{% block title %}Statistiques Administrateur{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+
+    <h3 class="mb-4 fw-bold text-primary">
+        <i class="bi bi-graph-up-arrow me-2"></i>
+        Statistiques des Absences Étudiants – Des Infos Claires et Amusantes ! 🎉
+    </h3>
+
+    <!-- ===================== -->
+    <!-- 📅 ABSENCES PAR JOUR -->
+    <!-- ===================== -->
+    <div class="card shadow-lg mb-5 border-0 rounded-3">
+        <div class="card-header fw-bold bg-primary text-white">
+            <i class="bi bi-calendar-event me-2"></i>
+            Absences par Jour – Le Quotidien en Chiffres !
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Date</th>
+                        <th>Total Absences</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for j in stats_jour %}
+                    <tr class="text-center">
+                        <td>{{ j.0 }}</td>
+                        <td class="fw-bold text-primary">{{ j.1 }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2" class="text-center text-muted fs-5">
+                            Aucune donnée... Les étudiants étaient tous au top ? 😎
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ===================== -->
+    <!-- 🗓️ ABSENCES PAR MOIS -->
+    <!-- ===================== -->
+    <div class="card shadow-lg mb-5 border-0 rounded-3">
+        <div class="card-header fw-bold bg-success text-white">
+            <i class="bi bi-calendar3 me-2"></i>
+            Absences par Mois – Un Tour d'Horizon Mensuel !
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Mois</th>
+                        <th>Total Absences</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in stats_mois %}
+                    <tr class="text-center">
+                        <td>{{ m.0 }}</td>
+                        <td class="fw-bold text-success">{{ m.1 }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2" class="text-center text-muted fs-5">
+                            Aucune donnée... Un mois sans faille ? 🌟
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- 🎓 ABSENCES PAR ANNÉE UNIV -->
+    <!-- ============================= -->
+    <div class="card shadow-lg mb-5 border-0 rounded-3">
+        <div class="card-header fw-bold bg-info text-white">
+            <i class="bi bi-mortarboard-fill me-2"></i>
+            Absences par Année Universitaire – L'Épopée Annuelle !
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Année Universitaire</th>
+                        <th>Total Absences</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in stats_annee %}
+                    <tr class="text-center">
+                        <td>{{ a.0 }}</td>
+                        <td class="fw-bold text-info">{{ a.1 }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2" class="text-center text-muted fs-5">
+                            Aucune donnée... Une année modèle ? 📚
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- =========================== -->
+    <!-- 📚 ABSENCES PAR MATIÈRE -->
+    <!-- =========================== -->
+    <div class="card shadow-lg mb-5 border-0 rounded-3">
+        <div class="card-header fw-bold bg-warning text-dark">
+            <i class="bi bi-book-fill me-2"></i>
+            Absences par Matière – Les Stars et les Fantômes !
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Matière</th>
+                        <th>Total Absences</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mat in stats_matiere %}
+                    <tr class="text-center">
+                        <td>{{ mat.0 }}</td>
+                        <td class="fw-bold text-warning">{{ mat.1 }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2" class="text-center text-muted fs-5">
+                            Aucune donnée... Tout roule ? 😉
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

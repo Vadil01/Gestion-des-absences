@@ -1,0 +1,152 @@
+/* ==============================
+   🎨 VARIABLES DE DESIGN
+================================ */
+:root {
+    --primary-500: #6366f1; /* Indigo moderne */
+    --primary-600: #4f46e5;
+    --accent-400: #06b6d4; /* Teal */
+    --muted: #6b7280;
+    --text-dark: #111827;
+    --bg-100: #f7f9fc;
+    --card-border: rgba(15,23,42,0.06);
+    --shadow-soft: 0 8px 30px rgba(15,23,42,0.06);
+    --shadow-hover: 0 14px 40px rgba(15,23,42,0.10);
+}
+
+/* ==============================
+   🌍 GLOBAL
+================================ */
+body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: linear-gradient(180deg, var(--bg-100) 0%, #eef2f6 100%);
+    color: var(--text-dark);
+}
+
+.text-muted {
+    color: var(--muted) !important;
+}
+
+/* ==============================
+   🧱 CARDS
+================================ */
+.card {
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    background: #fff;
+    box-shadow: var(--shadow-soft);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.card-header {
+    font-size: 1.05rem;
+    font-weight: 600;
+    background: transparent;
+    border-bottom: 1px solid var(--card-border);
+}
+
+/* ==============================
+   📝 FORM CARD
+================================ */
+.form-card {
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.form-card .card-header {
+    background: linear-gradient(
+        90deg,
+        rgba(99,102,241,0.14),
+        rgba(6,182,212,0.10)
+    );
+    border-bottom: 1px solid var(--card-border);
+}
+
+.form-card .card-body {
+    background: #ffffff;
+    padding: 1.75rem;
+}
+
+/* ==============================
+   ✏️ FORMULAIRES
+================================ */
+label.form-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    border: 1px solid rgba(15,23,42,0.08);
+    padding: .65rem .75rem;
+    font-size: 0.95rem;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.form-control::placeholder {
+    color: #9ca3af;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--accent-400);
+    box-shadow: 0 6px 18px rgba(6,182,212,0.15);
+}
+
+/* ==============================
+   🔘 BOUTONS
+================================ */
+.btn {
+    font-weight: 500;
+    border-radius: 10px;
+    padding: .55rem 1.1rem;
+    transition: all .15s ease;
+}
+
+/* Bouton principal */
+.btn-primary {
+    background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+    border: none;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(99,102,241,0.22);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: linear-gradient(90deg, var(--primary-600), #4338ca);
+    transform: translateY(-1px);
+}
+
+/* Bouton secondaire */
+.btn-outline-secondary {
+    border-color: rgba(15,23,42,0.15);
+    color: #374151;
+}
+
+.btn-outline-secondary:hover {
+    background-color: rgba(15,23,42,0.04);
+}
+
+/* ==============================
+   📱 RESPONSIVE
+================================ */
+@media (max-width: 576px) {
+    .form-card {
+        margin: 0.8rem 0;
+    }
+
+    .card h1 {
+        font-size: 2.4rem;
+    }
+}

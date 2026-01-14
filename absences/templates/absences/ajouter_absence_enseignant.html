@@ -1,0 +1,75 @@
+{% extends 'absences/base.html' %}
+
+{% block content %}
+{% block title %}Ajouter absence enseignant - {{ enseignant.nom }} {{ enseignant.prenom }}{% endblock %}
+
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+        <div class="card shadow-sm my-4 form-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-0">Ajouter Absence</h5>
+                    <small class="text-muted">{{ enseignant.nom }} {{ enseignant.prenom }}</small>
+                </div>
+                <a href="{% url 'liste_enseignant' %}" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Retour
+                </a>
+            </div>
+            <div class="card-body">
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="date_ae" class="form-label">Date</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+                            <input id="date_ae" type="date" name="date_ae" class="form-control" required>
+                            <div class="invalid-feedback">Veuillez choisir la date.</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="heure_ae" class="form-label">Heure</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                            <input id="heure_ae" type="time" name="heure_ae" class="form-control" required>
+                            <div class="invalid-feedback">Veuillez indiquer l'heure.</div>
+                        </div>
+                    </div>
+
+                <div class="mb-3">
+    <label for="type_ae" class="form-label">Type</label>
+    <div class="input-group has-validation">
+        <span class="input-group-text">
+            <i class="bi bi-flag"></i>
+        </span>
+        <input
+            id="type_ae"
+            type="text"
+            name="type_ae"
+            class="form-control"
+            value="ABSENCE"
+            readonly
+            required
+        >
+        <div class="invalid-feedback">
+            Veuillez choisir le type.
+        </div>
+    </div>
+</div>
+
+                   <div class="mb-3">
+                        <label for="motif" class="form-label">Motif</label>
+                        <textarea id="motif" name="motif" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-danger"><i class="bi bi-check-circle"></i> Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

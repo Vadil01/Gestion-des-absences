@@ -1,0 +1,48 @@
+{% extends 'absences/base_admin.html' %}
+{% block title %}Statistiques par enseignant{% endblock %}
+
+{% block content %}
+
+<h4 class="fw-bold mb-4">
+    <i class="bi bi-person-check-fill text-primary me-2"></i>
+    Statistiques des enseignants
+</h4>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Enseignant</th>
+                    <th class="text-center">Total absences déclarées</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            {% for s in stats %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td class="fw-semibold">{{ s.1 }}</td>
+                    <td class="text-center">
+                        <span class="badge bg-danger fs-6">
+                            {{ s.2 }}
+                        </span>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center text-muted">
+                        Aucune donnée disponible
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

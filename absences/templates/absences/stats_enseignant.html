@@ -1,36 +1,46 @@
-{% extends 'absences/base_admin.html' %}
-{% block title %}Statistiques Enseignants{% endblock %}
+{% extends 'absences/base_enseignant.html' %}
+
+{% block title %}Statistiques Enseignant{% endblock %}
 
 {% block content %}
-<h4 class="fw-bold mb-4">
-    <i class="bi bi-person-lines-fill"></i>
-    Absences ajoutées par enseignant
+
+<h4 class="mb-4">
+    <i class="bi bi-bar-chart-fill me-2"></i>
+    Mes statistiques
 </h4>
 
 <div class="card shadow-sm">
     <div class="card-body">
-        <table class="table table-hover table-bordered">
-            <thead class="table-light">
+
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
                 <tr>
-                    <th>Enseignant</th>
-                    <th class="text-center">Total absences ajoutées</th>
+                    <th>Date</th>
+                    <th>Matière</th>
+                    <th>Nombre d'absences</th>
                 </tr>
             </thead>
+
             <tbody>
-                {% for s in stats %}
+            {% for s in stats %}
                 <tr>
-                    <td>{{ s.0 }} {{ s.1 }}</td>
-                    <td class="fw-bold text-center">{{ s.2 }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="2" class="text-center text-muted">
-                        Aucune donnée
+                    <td>{{ s.date_ar|date:"d/m/Y" }}</td>
+                    <td>{{ s.matiere }}</td>
+                    <td class="text-danger fw-bold">
+                        {{ s.nb_absences }}
                     </td>
                 </tr>
-                {% endfor %}
+            {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center text-muted">
+                        Aucune statistique disponible
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
+
     </div>
 </div>
+
 {% endblock %}

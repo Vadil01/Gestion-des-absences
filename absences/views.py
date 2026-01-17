@@ -227,38 +227,31 @@ def supprimer_enseignant(request, id):
 # 📝 ABSENCES (ENSEIGNANT)
 # =========================
 # absences/views.py
-@admin_required
+
+
 def ajouter_absence_enseignant(request, id_enseignant):
     enseignant = get_object_or_404(Enseignant, id_enseignant=id_enseignant)
 
     if request.method == 'POST':
-        # 🔒 Sécurisé : évite MultiValueDictKeyError
-        date_ae = request.POST.get('date_ae')
-        heure_ae = request.POST.get('heure_ae')
-        type_ae = request.POST.get('type_ae')
-        motif = request.POST.get('motif', '')
-
-        if not date_ae or not heure_ae or not type_ae:
-            messages.error(request, "❌ Tous les champs obligatoires doivent être remplis.")
-            return redirect(request.path)
-
-        AbsenceEnseignant.objects.create(
-            enseignant=enseignant,   # ✅ PAS id_enseignant
-            date_ae=date_ae,
-            heure_ae=heure_ae,
-            type_ae=type_ae,
-            motif=motif
+        AbsenceRetard.objects.create(
+            id_enseignant=enseignant.id_enseignant,  # ✅ NOMBRE
+            matiere=request.POST.get('matiere'),
+            date_ar=request.POST.get('date_ar'),
+            heure_ar=request.POST.get('heure_ar'),
+            type_ar=request.POST.get('type_ar'),
+            justifie='N'
         )
 
-        messages.success(request, "✅ Absence ajoutée avec succès.")
-        return redirect('liste_enseignant')
+      #  return redirect('liste_enseignant')
 
-    return render(request, 'absences/ajouter_absence_enseignant.html', {
-        'enseignant': enseignant
-    })
+    return render(
+        request,
+        'absences/ajouter_absence_enseignant.html',
+        {'enseignant': enseignant}
+    )
 
 
-
+@login_required_custom
 def ajouter_absence(request, id_etudiant):
     etudiant = get_object_or_404(Etudiant, id_etudiant=id_etudiant)
 
@@ -310,7 +303,7 @@ def ajouter_absence_etudiant(request, id_etudiant):
 # =========================
 # 📈 STATISTIQUES (ORACLE)
 # =========================
-@admin_required
+@login_required_custom
 def statistique_admin(request):
     with connection.cursor() as cursor:
 
@@ -359,23 +352,26 @@ def statistique_admin(request):
     })
 
 
-@admin_required
-def stats_par_enseignant(request):
-    with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT e.nom, e.prenom, COUNT(ar.id_ar)
-            FROM absence_retard ar
-            JOIN enseignant e ON ar.id_enseignant = e.id_enseignant
-            GROUP BY e.nom, e.prenom
-            ORDER BY COUNT(ar.id_ar) DESC
-        """)
-        stats = cursor.fetchall()
+# views.py
+
+@enseignant_required
+def stats_enseignant(request):
+    enseignant = request.user.enseignant
+
+    stats = (
+        AbsenceRetard.objects
+        .filter(id_enseignant=enseignant.id)
+        .values('date_ar', 'matiere')
+        .annotate(nb_absences=Count('id_ar'))
+    )
 
     return render(
         request,
         'absences/stats_enseignant.html',
         {'stats': stats}
     )
+
+
 
 @admin_required
 def stats_etudiants_absents(request):
@@ -593,3 +589,18 @@ def supprimer_matiere(request, id_matiere):
 
     messages.success(request, "🗑️ Matière supprimée.")
     return redirect('liste_matiers')
+
+@admin_required
+def stats_par_enseignant(request):
+    stats = AbsenceRetard.objects.values(
+        'id_enseignant',
+        'matiere'
+    ).annotate(
+        total=Count('id_ar')
+    )
+
+    return render(
+        request,
+        'absences/stats_par_enseignant.html',
+        {'stats': stats}
+    )

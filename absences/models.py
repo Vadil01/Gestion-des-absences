@@ -276,3 +276,17 @@ class AbsenceRetard(models.Model):
     class Meta:
         db_table = 'ABSENCE_RETARD'
         managed = False
+# models.py
+
+
+class StatsAbsenceEnseignant(models.Model):
+    id_enseignant = models.IntegerField()
+    enseignant = models.CharField(max_length=100)
+    nom_matiere = models.CharField(max_length=100)
+    total = models.IntegerField()
+    total_absences = models.IntegerField()
+    total_retards = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'V_STATS_ABS_ENSEIGNANT'

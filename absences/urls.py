@@ -47,6 +47,7 @@ urlpatterns = [
     path('matieres/ajouter/', views.ajouter_matiere, name='ajouter_matiere'),
     path('matieres/modifier/<int:id_matiere>/', views.modifier_matiere, name='modifier_matiere'),
     path('matieres/supprimer/<int:id_matiere>/', views.supprimer_matiere, name='supprimer_matiere'),
+    path('enseignant/statistiques/',views.stats_enseignant, name='stats_enseignant' )
 
 
 
